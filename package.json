@@ -1,0 +1,18 @@
+{
+  "name": "whatsapp-order-bot",
+  "version": "1.0.0",
+  "description": "WhatsApp Order Bot with Google Sheets and Invoice Generation",
+  "main": "bot.js",
+  "dependencies": {
+    "google-spreadsheet": "^3.3.0",
+    "nodemailer": "^6.10.0",
+    "pdfkit": "^0.12.3",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.27.0"
+  },
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "author": "Your Name",
+  "license": "ISC"
+}
