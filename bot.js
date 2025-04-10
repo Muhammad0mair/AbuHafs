@@ -88,7 +88,6 @@ function generateInvoice(orderNumber, name, address, orderDetails) {
     }
 }
 
-const fs = require('fs');
 const qrcode = require('qrcode');
 
 // When the QR code is generated
