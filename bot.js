@@ -1,6 +1,6 @@
 
 const { Client } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
+// const qrcode = require('qrcode-terminal');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const nodemailer = require('nodemailer');
 const PDFDocument = require('pdfkit');
