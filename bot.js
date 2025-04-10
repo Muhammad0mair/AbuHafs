@@ -89,21 +89,26 @@ function generateInvoice(orderNumber, name, address, orderDetails) {
 }
 
 const qrcode = require('qrcode');
+let qrGenerated = false; // Flag to control QR generation
 
 // When the QR code is generated
 client.on('qr', async (qr) => {
+    if (qrGenerated) return; // Skip if already generated
+
+
   try {
     // Generate the QR code as a Base64 string
     const base64QR = await qrcode.toDataURL(qr); // This generates a Base64 string
     
     console.log('QR Code as Base64:', base64QR);
-    
+    qrGenerated = true; // Mark as generated
+
     // Optionally, you can send this Base64 string as a message to WhatsApp or any other use case
     // For example, sending it as an image in WhatsApp:
-    await client.sendMessage(msg.from, { 
-      body: 'Here is your QR Code: ', 
-      media: { url: base64QR, filename: 'qr-code.png' }
-    });
+    // await client.sendMessage(msg.from, { 
+    //   body: 'Here is your QR Code: ', 
+    //   media: { url: base64QR, filename: 'qr-code.png' }
+    // });
   } catch (err) {
     console.error('Error generating QR code:', err);
   }
