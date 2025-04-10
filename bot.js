@@ -1,6 +1,6 @@
 
 const { Client } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
+// const qrcode = require('qrcode-terminal');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const nodemailer = require('nodemailer');
 const PDFDocument = require('pdfkit');
@@ -88,7 +88,19 @@ function generateInvoice(orderNumber, name, address, orderDetails) {
     }
 }
 
-client.on('qr', qr => qrcode.generate(qr, { small: true }));
+const qrcode = require('qrcode');
+
+// When the QR code is generated
+client.on('qr', async (qr) => {
+  try {
+    // Generate QR code image
+    await qrcode.toFile('qr-code.png', qr); // This saves the QR code as a PNG file
+    
+    console.log('QR Code has been saved as qr-code.png');
+  } catch (err) {
+    console.error('Error generating QR code:', err);
+  }
+});
 
 
 client.on('ready', () => console.log('✅ WhatsApp bot is ready!'));
