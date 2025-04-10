@@ -88,7 +88,10 @@ function generateInvoice(orderNumber, name, address, orderDetails) {
     }
 }
 
-client.on('qr', qr => qrcode.generate(qr, { small: true }));
+client.on('qr', qr => {
+    const qrcode = require('qrcode-terminal');
+    qrcode.generate(qr, { small: true });
+});
 
 client.on('ready', () => console.log('✅ WhatsApp bot is ready!'));
 
