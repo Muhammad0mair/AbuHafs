@@ -93,15 +93,21 @@ const qrcode = require('qrcode');
 // When the QR code is generated
 client.on('qr', async (qr) => {
   try {
-    // Generate QR code image
-    await qrcode.toFile('qr-code.png', qr); // This saves the QR code as a PNG file
+    // Generate the QR code as a Base64 string
+    const base64QR = await qrcode.toDataURL(qr); // This generates a Base64 string
     
-    console.log('QR Code has been saved as qr-code.png');
+    console.log('QR Code as Base64:', base64QR);
+    
+    // Optionally, you can send this Base64 string as a message to WhatsApp or any other use case
+    // For example, sending it as an image in WhatsApp:
+    await client.sendMessage(msg.from, { 
+      body: 'Here is your QR Code: ', 
+      media: { url: base64QR, filename: 'qr-code.png' }
+    });
   } catch (err) {
     console.error('Error generating QR code:', err);
   }
 });
-
 
 client.on('ready', () => console.log('✅ WhatsApp bot is ready!'));
 
