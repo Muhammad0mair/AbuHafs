@@ -14,12 +14,20 @@ const EMAIL_TO = 'abuhafsperfumes@gmail.com';
 
 const creds = JSON.parse(fs.readFileSync('./creds.json', 'utf-8'));
 
-// const client = new Client();
 const client = new Client({
   puppeteer: {
-    headless: false,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  }
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-accelerated-2d-canvas',
+      '--no-first-run',
+      '--no-zygote',
+      '--single-process',
+      '--disable-gpu',
+    ],
+  },
 });
 client.initialize();
 const sessions = {};
